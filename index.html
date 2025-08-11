@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MathLearn - Mis Cursos</title>
+    <title>MathLearn - Mi Progreso</title>
     <style>
         * {
             margin: 0;
@@ -179,42 +179,132 @@
             line-height: 1.6;
         }
 
-        .course-stats {
+        .progress-overview {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
             margin-bottom: 30px;
         }
 
-        .stat-card {
+        .main-progress-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .overall-progress {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .progress-circle {
+            width: 180px;
+            height: 180px;
+            margin: 0 auto 20px;
+            position: relative;
+            border-radius: 50%;
+            background: conic-gradient(from 0deg, #4f46e5 0deg 244.8deg, #e5e7eb 244.8deg 360deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .progress-circle::before {
+            content: '';
+            width: 130px;
+            height: 130px;
+            border-radius: 50%;
+            background: white;
+            position: absolute;
+        }
+
+        .progress-percentage-large {
+            font-size: 36px;
+            font-weight: 900;
+            color: #4f46e5;
+            position: relative;
+            z-index: 1;
+        }
+
+        .progress-label-large {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 10px;
+        }
+
+        .progress-description {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .course-progress-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .course-progress-item {
+            padding: 20px;
+            background: #f8fafc;
             border-radius: 15px;
+            border-left: 4px solid #4f46e5;
+        }
+
+        .course-name {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            border-radius: 4px;
+            transition: width 0.6s ease;
+        }
+
+        .course-stats {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .stats-sidebar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
             padding: 25px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        .stat-item {
             text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stat-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 4px;
-            background: linear-gradient(90deg, #4f46e5, #7c3aed);
-        }
-
-        .stat-icon {
-            font-size: 36px;
-            margin-bottom: 15px;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(124, 58, 237, 0.05));
+            border-radius: 15px;
+            border: 1px solid rgba(79, 70, 229, 0.1);
         }
 
         .stat-number {
-            font-size: 28px;
-            font-weight: bold;
+            font-size: 32px;
+            font-weight: 900;
             color: #4f46e5;
             margin-bottom: 5px;
         }
@@ -222,116 +312,131 @@
         .stat-label {
             color: #6b7280;
             font-size: 14px;
+            font-weight: 600;
         }
 
-        .main-content {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 30px;
-        }
-
-        .courses-section {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .course-card {
+        .detailed-progress {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(15px);
             border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s ease;
-            cursor: pointer;
-        }
-
-        .course-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 50px rgba(79, 70, 229, 0.2);
-        }
-
-        .course-header {
-            position: relative;
-            height: 120px;
-            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 0 30px;
-            color: white;
-        }
-
-        .course-number {
-            font-size: 48px;
-            font-weight: 900;
-            opacity: 0.7;
-        }
-
-        .course-icon {
-            font-size: 56px;
-        }
-
-        .course-status {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            padding: 6px 12px;
-            border-radius: 15px;
-            font-size: 11px;
-            font-weight: 600;
-            backdrop-filter: blur(10px);
-        }
-
-        .status-active {
-            background: rgba(16, 185, 129, 0.9);
-            color: white;
-        }
-
-        .status-locked {
-            background: rgba(107, 114, 128, 0.9);
-            color: white;
-        }
-
-        .course-body {
             padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
         }
 
-        .course-title {
+        .section-title {
             font-size: 24px;
             font-weight: 700;
             color: #1f2937;
-            margin-bottom: 15px;
-        }
-
-        .course-description {
-            color: #6b7280;
-            font-size: 15px;
-            line-height: 1.6;
             margin-bottom: 25px;
-        }
-
-        .subtopics-list {
-            margin-bottom: 25px;
-        }
-
-        .subtopics-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: #1f2937;
-            margin-bottom: 12px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
+        }
+
+        .topics-progress {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .topic-card {
+            border: 1px solid #e5e7eb;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .topic-card:hover {
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .topic-header {
+            padding: 20px;
+            background: #f8fafc;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .topic-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .topic-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: linear-gradient(45deg, #4f46e5, #7c3aed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .topic-details {
+            flex: 1;
+        }
+
+        .topic-name {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 5px;
+        }
+
+        .topic-meta {
+            font-size: 14px;
+            color: #6b7280;
+            display: flex;
+            gap: 20px;
+        }
+
+        .topic-progress {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .topic-percentage {
+            font-size: 18px;
+            font-weight: 700;
+            color: #4f46e5;
+        }
+
+        .topic-expand-icon {
+            font-size: 20px;
+            color: #6b7280;
+            transition: transform 0.3s ease;
+        }
+
+        .topic-expanded .topic-expand-icon {
+            transform: rotate(180deg);
+        }
+
+        .subtopics-container {
+            display: none;
+            padding: 20px;
+            background: white;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .topic-expanded .subtopics-container {
+            display: block;
         }
 
         .subtopic-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            padding: 10px 0;
+            gap: 15px;
+            padding: 15px 0;
             border-bottom: 1px solid #f3f4f6;
-            font-size: 14px;
         }
 
         .subtopic-item:last-child {
@@ -339,13 +444,13 @@
         }
 
         .subtopic-status {
-            width: 20px;
-            height: 20px;
+            width: 30px;
+            height: 30px;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: bold;
         }
 
@@ -364,132 +469,145 @@
             color: #6b7280;
         }
 
-        .subtopic-text {
+        .subtopic-info {
             flex: 1;
-            color: #4b5563;
         }
 
-        .subtopic-text.completed {
+        .subtopic-name {
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 3px;
+        }
+
+        .subtopic-score {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .subtopic-score.completed {
             color: #10b981;
         }
 
-        .subtopic-text.current {
+        .subtopic-score.current {
             color: #f59e0b;
-            font-weight: 600;
         }
 
-        .course-progress-section {
-            margin-bottom: 25px;
+        .achievements-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
         }
 
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 10px;
+        .achievements-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
         }
 
-        .progress-label {
-            font-size: 14px;
-            font-weight: 600;
-            color: #4b5563;
-        }
-
-        .progress-percentage {
-            font-size: 16px;
-            font-weight: 700;
-            color: #4f46e5;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 10px;
-            background: #e5e7eb;
-            border-radius: 5px;
+        .achievement-card {
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 15px;
+            padding: 20px;
+            text-align: center;
+            position: relative;
             overflow: hidden;
         }
 
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #4f46e5, #7c3aed);
-            border-radius: 5px;
-            transition: width 0.6s ease;
+        .achievement-card.locked {
+            background: rgba(107, 114, 128, 0.1);
+            border-color: rgba(107, 114, 128, 0.2);
         }
 
-        .course-meta {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            font-size: 13px;
+        .achievement-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+        }
+
+        .achievement-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: #059669;
+            margin-bottom: 8px;
+        }
+
+        .achievement-card.locked .achievement-title {
             color: #6b7280;
-            padding: 15px;
+        }
+
+        .achievement-description {
+            font-size: 14px;
+            color: #047857;
+            line-height: 1.4;
+        }
+
+        .achievement-card.locked .achievement-description {
+            color: #9ca3af;
+        }
+
+        .study-time-chart {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(15px);
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .chart-container {
+            height: 200px;
             background: #f8fafc;
             border-radius: 10px;
-        }
-
-        .meta-item {
+            margin-top: 20px;
             display: flex;
-            align-items: center;
-            gap: 6px;
+            align-items: end;
+            justify-content: space-around;
+            padding: 20px;
+            gap: 10px;
         }
 
-        .course-actions {
-            display: flex;
-            gap: 12px;
-        }
-
-        .action-btn {
-            flex: 1;
-            padding: 14px;
-            border: none;
-            border-radius: 10px;
-            font-weight: 600;
-            cursor: pointer;
+        .chart-bar {
+            background: linear-gradient(to top, #4f46e5, #7c3aed);
+            border-radius: 4px 4px 0 0;
+            min-width: 40px;
+            position: relative;
             transition: all 0.3s ease;
-            text-align: center;
-            font-size: 14px;
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
         }
 
-        .btn-primary {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            color: white;
+        .chart-bar:hover {
+            transform: scale(1.05);
         }
 
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.3);
+        .chart-day {
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 12px;
+            color: #6b7280;
+            font-weight: 600;
         }
 
-        .btn-secondary {
-            background: rgba(79, 70, 229, 0.1);
+        .chart-value {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
             color: #4f46e5;
-            border: 1px solid #4f46e5;
+            font-weight: bold;
         }
 
-        .btn-secondary:hover {
-            background: #4f46e5;
-            color: white;
+        .performance-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin-bottom: 30px;
         }
 
-        .btn-locked {
-            background: #f3f4f6;
-            color: #9ca3af;
-            cursor: not-allowed;
-        }
-
-        .sidebar {
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
-
-        .sidebar-card {
+        .metric-card {
             background: rgba(255, 255, 255, 0.95);
             backdrop-filter: blur(15px);
             border-radius: 20px;
@@ -497,82 +615,61 @@
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
-        .card-title {
-            font-size: 18px;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .quick-access-item {
+        .metric-header {
             display: flex;
             align-items: center;
             gap: 15px;
-            padding: 15px;
-            background: rgba(79, 70, 229, 0.05);
+            margin-bottom: 20px;
+        }
+
+        .metric-icon {
+            width: 50px;
+            height: 50px;
             border-radius: 12px;
-            margin-bottom: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            border-left: 4px solid #4f46e5;
-        }
-
-        .quick-access-item:hover {
-            background: rgba(79, 70, 229, 0.1);
-            transform: translateX(5px);
-        }
-
-        .quick-access-icon {
-            width: 40px;
-            height: 40px;
-            border-radius: 10px;
             background: linear-gradient(45deg, #4f46e5, #7c3aed);
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 18px;
             color: white;
+            font-size: 20px;
         }
 
-        .quick-access-text {
+        .metric-info {
             flex: 1;
         }
 
-        .quick-access-title {
-            font-weight: 600;
+        .metric-title {
+            font-size: 18px;
+            font-weight: 700;
             color: #1f2937;
-            margin-bottom: 3px;
-            font-size: 14px;
+            margin-bottom: 5px;
         }
 
-        .quick-access-desc {
-            font-size: 12px;
+        .metric-subtitle {
+            font-size: 14px;
             color: #6b7280;
         }
 
-        .study-tip {
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
-            border-radius: 12px;
-            padding: 20px;
-            border-left: 4px solid #10b981;
+        .metric-value {
+            font-size: 32px;
+            font-weight: 900;
+            color: #4f46e5;
+            margin-bottom: 10px;
         }
 
-        .tip-title {
-            font-weight: 600;
-            color: #059669;
-            margin-bottom: 8px;
+        .metric-trend {
             display: flex;
             align-items: center;
             gap: 8px;
+            font-size: 14px;
         }
 
-        .tip-content {
-            color: #047857;
-            font-size: 14px;
-            line-height: 1.5;
+        .trend-positive {
+            color: #10b981;
+        }
+
+        .trend-negative {
+            color: #ef4444;
         }
 
         .floating-help {
@@ -599,35 +696,37 @@
         }
 
         @media (max-width: 1024px) {
-            .main-content {
+            .progress-overview {
                 grid-template-columns: 1fr;
             }
             
-            .course-stats {
-                grid-template-columns: repeat(2, 1fr);
+            .course-progress-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .performance-metrics {
+                grid-template-columns: 1fr;
             }
         }
 
         @media (max-width: 768px) {
-            .course-header {
-                height: 100px;
-                padding: 0 20px;
-            }
-            
-            .course-number {
-                font-size: 36px;
-            }
-            
-            .course-icon {
-                font-size: 40px;
-            }
-            
-            .course-actions {
-                flex-direction: column;
-            }
-            
-            .course-stats {
+            .achievements-grid {
                 grid-template-columns: 1fr;
+            }
+            
+            .chart-container {
+                height: 150px;
+                padding: 15px;
+            }
+            
+            .progress-circle {
+                width: 150px;
+                height: 150px;
+            }
+            
+            .progress-circle::before {
+                width: 110px;
+                height: 110px;
             }
         }
     </style>
@@ -654,11 +753,11 @@
                 <div class="nav-icon">🏠</div>
                 <div class="nav-text">Inicio</div>
             </a>
-            <a href="#" class="nav-item active" onclick="switchSection('cursos')">
+            <a href="#" class="nav-item" onclick="switchSection('cursos')">
                 <div class="nav-icon">📖</div>
                 <div class="nav-text">Mis Cursos</div>
             </a>
-            <a href="#" class="nav-item" onclick="switchSection('progreso')">
+            <a href="#" class="nav-item active" onclick="switchSection('progreso')">
                 <div class="nav-icon">📊</div>
                 <div class="nav-text">Progreso</div>
             </a>
@@ -675,217 +774,155 @@
         <!-- Page Header -->
         <div class="page-header">
             <h1 class="page-title">
-                📖 Mis Cursos de Análisis Matemático
+                📊 Mi Progreso Académico
             </h1>
             <p class="page-subtitle">
-                Domina los conceptos fundamentales de límites y continuidad. Cada curso está diseñado 
-                para llevarte paso a paso desde los conceptos básicos hasta las aplicaciones avanzadas.
+                Visualiza tu rendimiento y avance en los cursos de Análisis Matemático. 
+                Mantén el ritmo y alcanza tus objetivos de aprendizaje.
             </p>
         </div>
 
-        <!-- Course Statistics -->
-        <div class="course-stats">
-            <div class="stat-card">
-                <div class="stat-icon">📚</div>
-                <div class="stat-number">2</div>
-                <div class="stat-label">Cursos Disponibles</div>
+        <!-- Progress Overview -->
+        <div class="progress-overview">
+            <div class="main-progress-card">
+                <div class="overall-progress">
+                    <div class="progress-circle">
+                        <div class="progress-percentage-large">68%</div>
+                    </div>
+                    <div class="progress-label-large">Progreso General</div>
+                    <div class="progress-description">Has completado 68% de tus cursos activos</div>
+                </div>
+                
+                <div class="course-progress-grid">
+                    <div class="course-progress-item">
+                        <div class="course-name">6. Límites de Funciones Reales</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 75%"></div>
+                        </div>
+                        <div class="course-stats">
+                            <span>75% completado</span>
+                            <span>3 de 4 temas</span>
+                        </div>
+                    </div>
+                    <div class="course-progress-item">
+                        <div class="course-name">7. Continuidad</div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 0%"></div>
+                        </div>
+                        <div class="course-stats">
+                            <span>Bloqueado</span>
+                            <span>0 de 4 temas</span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <div class="stat-card">
-                <div class="stat-icon">📈</div>
-                <div class="stat-number">68%</div>
-                <div class="stat-label">Progreso Global</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">⏰</div>
-                <div class="stat-number">15.7h</div>
-                <div class="stat-label">Tiempo Total</div>
-            </div>
-            <div class="stat-card">
-                <div class="stat-icon">🎯</div>
-                <div class="stat-number">87%</div>
-                <div class="stat-label">Promedio General</div>
+
+            <div class="stats-sidebar">
+                <div class="stat-item">
+                    <div class="stat-number">87%</div>
+                    <div class="stat-label">Promedio General</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">15.7h</div>
+                    <div class="stat-label">Tiempo Total</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">23</div>
+                    <div class="stat-label">Ejercicios Resueltos</div>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-number">5</div>
+                    <div class="stat-label">Racha Actual</div>
+                </div>
             </div>
         </div>
 
-        <div class="main-content">
-            <div class="courses-section">
-                <!-- Course 1: Límites de Funciones Reales -->
-                <div class="course-card" onclick="openCourse('limites')">
-                    <div class="course-header">
-                        <div class="course-number">6</div>
-                        <div class="course-icon">∞</div>
-                        <div class="course-status status-active">ACTIVO</div>
+        <!-- Detailed Progress by Topics -->
+        <div class="detailed-progress">
+            <h2 class="section-title">🎯 Progreso Detallado por Temas</h2>
+            <div class="topics-progress">
+                <!-- Topic 1 -->
+                <div class="topic-card topic-expanded" onclick="toggleTopic(this)">
+                    <div class="topic-header">
+                        <div class="topic-info">
+                            <div class="topic-icon">6</div>
+                            <div class="topic-details">
+                                <div class="topic-name">Límites de Funciones Reales</div>
+                                <div class="topic-meta">
+                                    <span>4 subtemas</span>
+                                    <span>Iniciado el 15 Jul 2025</span>
+                                    <span>12.5h completadas</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="topic-progress">
+                            <div class="topic-percentage">75%</div>
+                            <div class="topic-expand-icon">▼</div>
+                        </div>
                     </div>
-                    <div class="course-body">
-                        <h2 class="course-title">6. LÍMITES DE FUNCIONES REALES</h2>
-                        <p class="course-description">
-                            Domina el concepto fundamental de límites en funciones reales. Este curso 
-                            te llevará desde la definición básica hasta las propiedades avanzadas y límites trigonométricos.
-                        </p>
-                        
-                        <div class="subtopics-list">
-                            <h3 class="subtopics-title">📋 Contenido del Curso</h3>
-                            <div class="subtopic-item">
-                                <div class="subtopic-status status-completed">✓</div>
-                                <div class="subtopic-text completed">6.1. Definición de Límites</div>
-                            </div>
-                            <div class="subtopic-item">
-                                <div class="subtopic-status status-current">⚡</div>
-                                <div class="subtopic-text current">6.2. Límites laterales y existencia del límite</div>
-                            </div>
-                            <div class="subtopic-item">
-                                <div class="subtopic-status status-pending">○</div>
-                                <div class="subtopic-text">6.3. Propiedades de los límites</div>
-                            </div>
-                            <div class="subtopic-item">
-                                <div class="subtopic-status status-pending">○</div>
-                                <div class="subtopic-text">6.4. Límites trigonométricos</div>
+                    <div class="subtopics-container">
+                        <div class="subtopic-item">
+                            <div class="subtopic-status status-completed">✓</div>
+                            <div class="subtopic-info">
+                                <div class="subtopic-name">6.1. Definición de Límites</div>
+                                <div class="subtopic-score completed">Completado • Calificación: 92%</div>
                             </div>
                         </div>
-
-                        <div class="course-progress-section">
-                            <div class="progress-header">
-                                <span class="progress-label">Progreso del Curso</span>
-                                <span class="progress-percentage">75%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 75%"></div>
+                        <div class="subtopic-item">
+                            <div class="subtopic-status status-current">⚡</div>
+                            <div class="subtopic-info">
+                                <div class="subtopic-name">6.2. Límites laterales y existencia del límite</div>
+                                <div class="subtopic-score current">En progreso • 60% completado</div>
                             </div>
                         </div>
-
-                        <div class="course-meta">
-                            <div class="meta-item">
-                                <span>📅</span>
-                                <span>Inicio: 15 Jul 2025</span>
-                            </div>
-                            <div class="meta-item">
-                                <span>⏱️</span>
-                                <span>12.5 horas completadas</span>
-                            </div>
-                            <div class="meta-item">
-                                <span>📊</span>
-                                <span>85% promedio</span>
-                            </div>
-                            <div class="meta-item">
-                                <span>🎯</span>
-                                <span>3 de 4 temas</span>
+                        <div class="subtopic-item">
+                            <div class="subtopic-status status-pending">○</div>
+                            <div class="subtopic-info">
+                                <div class="subtopic-name">6.3. Propiedades de los límites</div>
+                                <div class="subtopic-score">Pendiente</div>
                             </div>
                         </div>
-
-                        <div class="course-actions">
-                            <a href="#" class="action-btn btn-primary" onclick="continueCourse('limites')">
-                                ▶️ Continuar con 6.2
-                            </a>
-                            <a href="#" class="action-btn btn-secondary" onclick="viewDetails('limites')">
-                                📄 Ver Detalles
-                            </a>
+                        <div class="subtopic-item">
+                            <div class="subtopic-status status-pending">○</div>
+                            <div class="subtopic-info">
+                                <div class="subtopic-name">6.4. Límites trigonométricos</div>
+                                <div class="subtopic-score">Pendiente</div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Course 2: Continuidad -->
-                <div class="course-card" onclick="showLockedMessage('continuidad')">
-                    <div class="course-header" style="background: linear-gradient(135deg, #6b7280 0%, #4b5563 100%);">
-                        <div class="course-number">7</div>
-                        <div class="course-icon">📈</div>
-                        <div class="course-status status-locked">BLOQUEADO</div>
-                    </div>
-                    <div class="course-body">
-                        <h2 class="course-title">7. CONTINUIDAD</h2>
-                        <p class="course-description">
-                            Explora el concepto de continuidad en funciones reales. Aprende sobre continuidad puntual, 
-                            teoremas fundamentales y continuidad en diferentes tipos de intervalos.
-                        </p>
-                        
-                        <div class="subtopics-list">
-                            <h3 class="subtopics-title">📋 Contenido del Curso</h3>
-                            <div class="subtopic-item">
-                                <div class="subtopic-status status-pending">🔒</div>
-                                <div class="subtopic-text">7.1. Continuidad puntual</div>
-                            </div>
-                            <div class="subtopic-item">
-                                <div class="subtopic-status status-pending">🔒</div>
-                                <div class="subtopic-text">7.2. Teoremas de continuidad en un punto</div>
-                            </div>
-                            <div class="subtopic-item">
-                                <div class="subtopic-status status-pending">🔒</div>
-                                <div class="subtopic-text">7.3. Continuidad en un intervalo abierto</div>
-                            </div>
-                            <div class="subtopic-item">
-                                <div class="subtopic-status status-pending">🔒</div>
-                                <div class="subtopic-text">7.4. Continuidad en un intervalo cerrado</div>
+                <!-- Topic 2 -->
+                <div class="topic-card" onclick="toggleTopic(this)">
+                    <div class="topic-header">
+                        <div class="topic-info">
+                            <div class="topic-icon" style="background: linear-gradient(45deg, #6b7280, #4b5563);">7</div>
+                            <div class="topic-details">
+                                <div class="topic-name">Continuidad</div>
+                                <div class="topic-meta">
+                                    <span>4 subtemas</span>
+                                    <span>Bloqueado</span>
+                                    <span>~8h estimadas</span>
+                                </div>
                             </div>
                         </div>
-
-                        <div class="course-progress-section">
-                            <div class="progress-header">
-                                <span class="progress-label">Progreso del Curso</span>
-                                <span class="progress-percentage">0%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 0%"></div>
-                            </div>
-                        </div>
-
-                        <div class="course-meta">
-                            <div class="meta-item">
-                                <span>🔒</span>
-                                <span>Requiere completar Curso 6</span>
-                            </div>
-                            <div class="meta-item">
-                                <span>⏱️</span>
-                                <span>~8 horas estimadas</span>
-                            </div>
-                            <div class="meta-item">
-                                <span>📈</span>
-                                <span>Nivel Intermedio</span>
-                            </div>
-                            <div class="meta-item">
-                                <span>🎯</span>
-                                <span>4 temas disponibles</span>
-                            </div>
-                        </div>
-
-                        <div class="course-actions">
-                            <a href="#" class="action-btn btn-locked" onclick="showLockedMessage('continuidad')">
-                                🔒 Bloqueado
-                            </a>
-                            <a href="#" class="action-btn btn-secondary" onclick="viewPreview('continuidad')">
-                                👁️ Vista Previa
-                            </a>
+                        <div class="topic-progress">
+                            <div class="topic-percentage">0%</div>
+                            <div class="topic-expand-icon">▼</div>
                         </div>
                     </div>
-                </div>
-            </div>
-
-            <!-- Sidebar -->
-            <div class="sidebar">
-                <!-- Quick Access -->
-                <div class="sidebar-card">
-                    <h3 class="card-title">⚡ Acceso Rápido</h3>
-                    <div class="quick-access-item" onclick="goToLastLesson()">
-                        <div class="quick-access-icon">📖</div>
-                        <div class="quick-access-text">
-                            <div class="quick-access-title">Última Lección</div>
-                            <div class="quick-access-desc">Límites Laterales - Ejercicio 5</div>
+                    <div class="subtopics-container">
+                        <div class="subtopic-item">
+                            <div class="subtopic-status status-pending">🔒</div>
+                            <div class="subtopic-info">
+                                <div class="subtopic-name">7.1. Continuidad puntual</div>
+                                <div class="subtopic-score">Bloqueado</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="quick-access-item" onclick="openPracticeMode()">
-                        <div class="quick-access-icon">🧮</div>
-                        <div class="quick-access-text">
-                            <div class="quick-access-title">Práctica Rápida</div>
-                            <div class="quick-access-desc">Ejercicios de repaso</div>
+                        <div class="subtopic-item">
+                            <div class="subtopic-status status-pending">🔒</div>
+                            <div class="subtopic-info">
+                                <div class="subtopic-name">7.2. Teoremas de continuidad en un punto</div>
+                                <div class="subtopic-score">Bloqueado</div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="quick-access-item" onclick="openNotes()">
-                        <div class="quick-access-icon">📝</div>
-                        <div class="quick-access-text">
-                            <div class="quick-access-title">Mis Notas</div>
-                            <div class="quick-access-desc">12 notas guardadas</div>
-                        </div>
-                    </div>
-                    <div class="quick-access-item" onclick="openFormulas()">
-                        <div class="quick-access-icon">🔢</div>
-                        <div class="quick-access-text">
-                            <div class="quick-access-title">Formulario</div>
-                            <div
