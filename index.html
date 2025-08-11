@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MathLearn - Iniciar Sesión</title>
+    <title>MathLearn - Mi Dashboard</title>
     <style>
         * {
             margin: 0;
@@ -13,797 +13,894 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4f46e5;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .header-nav {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #6b7280;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            padding: 8px 16px;
+            border-radius: 6px;
+        }
+
+        .nav-link:hover, .nav-link.active {
+            color: #4f46e5;
+            background: rgba(79, 70, 229, 0.1);
+        }
+
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
-            position: relative;
-            overflow: hidden;
+            color: white;
+            font-weight: bold;
+            font-size: 18px;
         }
 
-        body::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
-            pointer-events: none;
-        }
-
-        .floating-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        .shape {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 50%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .shape:nth-child(1) {
-            width: 80px;
-            height: 80px;
-            top: 20%;
-            left: 10%;
-            animation-delay: 0s;
-        }
-
-        .shape:nth-child(2) {
-            width: 120px;
-            height: 120px;
-            top: 60%;
-            right: 15%;
-            animation-delay: 2s;
-        }
-
-        .shape:nth-child(3) {
-            width: 60px;
-            height: 60px;
-            bottom: 30%;
-            left: 20%;
-            animation-delay: 4s;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px) rotate(0deg); opacity: 0.3; }
-            50% { transform: translateY(-20px) rotate(180deg); opacity: 0.6; }
-        }
-
-        .login-container {
+        .welcome-section {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
-            padding: 40px;
-            width: 100%;
-            max-width: 450px;
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            text-align: center;
             position: relative;
-            border: 1px solid rgba(255, 255, 255, 0.2);
+            overflow: hidden;
         }
 
-        .login-container::before {
+        .welcome-section::before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2, #f093fb);
-            border-radius: 20px 20px 0 0;
-        }
-
-        .logo-section {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .logo {
-            font-size: 48px;
-            margin-bottom: 10px;
-        }
-
-        .logo-text {
-            font-size: 28px;
-            font-weight: 700;
-            background: linear-gradient(135deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            margin-bottom: 8px;
-        }
-
-        .logo-subtitle {
-            color: #6b7280;
-            font-size: 16px;
-            font-weight: 500;
-        }
-
-        .welcome-text {
-            text-align: center;
-            margin-bottom: 30px;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed, #f093fb);
         }
 
         .welcome-title {
+            font-size: 28px;
             color: #1f2937;
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
         }
 
         .welcome-subtitle {
             color: #6b7280;
-            font-size: 14px;
+            font-size: 16px;
+            margin-bottom: 20px;
         }
 
-        .form-group {
-            margin-bottom: 20px;
+        .progress-overview {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 30px;
+            margin-top: 20px;
+        }
+
+        .overall-progress {
+            text-align: center;
+        }
+
+        .progress-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: conic-gradient(#4f46e5 0deg 252deg, #e5e7eb 252deg 360deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 10px;
             position: relative;
         }
 
-        .form-label {
-            display: block;
-            margin-bottom: 8px;
-            font-weight: 600;
-            color: #374151;
+        .progress-circle::before {
+            content: '';
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            background: white;
+            position: absolute;
+        }
+
+        .progress-text {
+            position: relative;
+            z-index: 1;
+            font-weight: bold;
+            color: #1f2937;
+            font-size: 18px;
+        }
+
+        .progress-stats {
+            display: flex;
+            gap: 40px;
+            color: #6b7280;
             font-size: 14px;
         }
 
-        .form-input {
-            width: 100%;
-            padding: 15px 20px;
-            border: 2px solid #e5e7eb;
-            border-radius: 12px;
-            font-size: 16px;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.8);
+        .stat-item {
+            text-align: center;
         }
 
-        .form-input:focus {
-            outline: none;
-            border-color: #667eea;
-            box-shadow: 0 0 0 4px rgba(102, 126, 234, 0.1);
-            background: rgba(255, 255, 255, 1);
+        .stat-number {
+            display: block;
+            font-size: 24px;
+            font-weight: bold;
+            color: #4f46e5;
         }
 
-        .form-input::placeholder {
-            color: #9ca3af;
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin-bottom: 30px;
         }
 
-        .input-icon {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            color: #9ca3af;
-            font-size: 18px;
-            pointer-events: none;
+        .modules-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
-        .password-toggle {
-            position: absolute;
-            right: 15px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: none;
-            border: none;
-            color: #9ca3af;
-            font-size: 18px;
-            cursor: pointer;
-            padding: 5px;
-        }
-
-        .password-toggle:hover {
-            color: #667eea;
-        }
-
-        .form-options {
+        .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             margin-bottom: 25px;
+        }
+
+        .section-title {
+            font-size: 22px;
+            font-weight: 700;
+            color: #1f2937;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .view-all {
+            color: #4f46e5;
+            text-decoration: none;
+            font-weight: 600;
             font-size: 14px;
         }
 
-        .remember-me {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #374151;
+        .modules-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
         }
 
-        .remember-me input[type="checkbox"] {
-            width: 16px;
-            height: 16px;
-            accent-color: #667eea;
-        }
-
-        .forgot-password {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 500;
-            transition: color 0.3s ease;
-        }
-
-        .forgot-password:hover {
-            color: #4f46e5;
-        }
-
-        .login-button {
-            width: 100%;
-            padding: 15px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            border: none;
+        .module-card {
+            background: white;
             border-radius: 12px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
+            padding: 25px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             transition: all 0.3s ease;
+            border: 2px solid transparent;
             position: relative;
             overflow: hidden;
         }
 
-        .login-button::before {
+        .module-card::before {
             content: '';
             position: absolute;
             top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
-            transition: left 0.5s ease;
-        }
-
-        .login-button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
-        }
-
-        .login-button:hover::before {
-            left: 100%;
-        }
-
-        .login-button:active {
-            transform: translateY(0);
-        }
-
-        .divider {
-            text-align: center;
-            margin: 25px 0;
-            position: relative;
-            color: #9ca3af;
-            font-size: 14px;
-        }
-
-        .divider::before {
-            content: '';
-            position: absolute;
-            top: 50%;
             left: 0;
             right: 0;
-            height: 1px;
-            background: #e5e7eb;
+            height: 4px;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
         }
 
-        .divider span {
-            background: rgba(255, 255, 255, 0.95);
-            padding: 0 15px;
-            position: relative;
-            z-index: 1;
+        .module-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(79, 70, 229, 0.15);
+            border-color: #4f46e5;
         }
 
-        .role-selector {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            margin-bottom: 25px;
-        }
-
-        .role-option {
-            padding: 15px 10px;
-            border: 2px solid #e5e7eb;
-            border-radius: 10px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: rgba(255, 255, 255, 0.5);
-        }
-
-        .role-option:hover {
-            border-color: #667eea;
-            background: rgba(102, 126, 234, 0.05);
-        }
-
-        .role-option.selected {
-            border-color: #667eea;
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-            color: #667eea;
-        }
-
-        .role-icon {
-            font-size: 24px;
-            margin-bottom: 8px;
-        }
-
-        .role-text {
-            font-size: 12px;
-            font-weight: 600;
-        }
-
-        .signup-link {
-            text-align: center;
-            margin-top: 25px;
-            padding-top: 20px;
-            border-top: 1px solid #e5e7eb;
-            color: #6b7280;
-            font-size: 14px;
-        }
-
-        .signup-link a {
-            color: #667eea;
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        .signup-link a:hover {
-            text-decoration: underline;
-        }
-
-        .features-preview {
-            margin-top: 20px;
-            padding: 20px;
-            background: rgba(102, 126, 234, 0.05);
-            border-radius: 10px;
-            border: 1px solid rgba(102, 126, 234, 0.2);
-        }
-
-        .features-title {
-            font-size: 14px;
-            font-weight: 600;
-            color: #374151;
-            margin-bottom: 10px;
-            text-align: center;
-        }
-
-        .features-list {
+        .module-header {
             display: flex;
-            justify-content: space-around;
-            text-align: center;
-            gap: 15px;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
         }
 
-        .feature-item {
-            color: #6b7280;
-            font-size: 12px;
-        }
-
-        .feature-icon {
-            font-size: 20px;
-            color: #667eea;
-            margin-bottom: 5px;
-        }
-
-        .error-message {
-            background: rgba(239, 68, 68, 0.1);
-            border: 1px solid #ef4444;
-            color: #dc2626;
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            display: none;
-        }
-
-        .success-message {
-            background: rgba(16, 185, 129, 0.1);
-            border: 1px solid #10b981;
-            color: #059669;
-            padding: 12px 15px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            font-size: 14px;
-            display: none;
-        }
-
-        .loading-spinner {
-            width: 20px;
-            height: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 50%;
-            border-top-color: white;
-            animation: spin 1s linear infinite;
-            display: none;
-        }
-
-        @keyframes spin {
-            to { transform: rotate(360deg); }
-        }
-
-        .demo-credentials {
-            background: rgba(245, 158, 11, 0.1);
-            border: 1px solid #f59e0b;
-            border-radius: 8px;
-            padding: 15px;
-            margin-bottom: 20px;
-            font-size: 13px;
-        }
-
-        .demo-title {
-            font-weight: 600;
-            color: #92400e;
-            margin-bottom: 8px;
+        .module-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
             display: flex;
             align-items: center;
-            gap: 5px;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
         }
 
-        .demo-list {
-            color: #78350f;
-            line-height: 1.4;
+        .module-status {
+            padding: 4px 12px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
         }
 
-        .quick-login {
+        .status-completed {
+            background: #dcfce7;
+            color: #166534;
+        }
+
+        .status-progress {
+            background: #dbeafe;
+            color: #1d4ed8;
+        }
+
+        .status-locked {
+            background: #f3f4f6;
+            color: #6b7280;
+        }
+
+        .module-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .module-description {
+            color: #6b7280;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+
+        .module-progress {
+            margin-bottom: 15px;
+        }
+
+        .progress-label {
             display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            font-size: 13px;
+            color: #374151;
+            font-weight: 600;
+        }
+
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: #e5e7eb;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #4f46e5, #7c3aed);
+            border-radius: 4px;
+            transition: width 0.3s ease;
+        }
+
+        .module-actions {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
             gap: 8px;
-            margin-top: 8px;
+            font-size: 14px;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(79, 70, 229, 0.1);
+            color: #4f46e5;
+            border: 2px solid #4f46e5;
+        }
+
+        .btn-disabled {
+            background: #f3f4f6;
+            color: #9ca3af;
+            cursor: not-allowed;
+            flex: 1;
+            justify-content: center;
+        }
+
+        .sidebar-widgets {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .widget {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .widget-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .achievement-item:last-child {
+            border-bottom: none;
+        }
+
+        .achievement-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: white;
+        }
+
+        .achievement-content {
+            flex: 1;
+        }
+
+        .achievement-title {
+            font-weight: 600;
+            color: #1f2937;
+            font-size: 14px;
+        }
+
+        .achievement-desc {
+            color: #6b7280;
+            font-size: 12px;
+        }
+
+        .quick-access {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-top: 15px;
         }
 
         .quick-btn {
-            background: #f59e0b;
+            background: #f8fafc;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 15px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            color: #374151;
+        }
+
+        .quick-btn:hover {
+            border-color: #4f46e5;
+            background: rgba(79, 70, 229, 0.05);
+            transform: translateY(-2px);
+        }
+
+        .quick-btn-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #4f46e5;
+        }
+
+        .quick-btn-text {
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .recent-activity {
+            margin-top: 15px;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
             color: white;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-text {
+            font-size: 14px;
+            color: #374151;
+            margin-bottom: 2px;
+        }
+
+        .activity-time {
+            font-size: 12px;
+            color: #6b7280;
+        }
+
+        .bottom-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .announcement-card {
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(124, 58, 237, 0.1));
+            border: 1px solid rgba(79, 70, 229, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            position: relative;
+        }
+
+        .announcement-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .announcement-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 18px;
+        }
+
+        .calendar-widget {
+            background: white;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 15px;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #1f2937;
+            font-weight: 600;
+        }
+
+        .calendar-nav {
+            background: none;
             border: none;
-            padding: 4px 8px;
+            font-size: 18px;
+            cursor: pointer;
+            color: #4f46e5;
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 5px;
+            text-align: center;
+        }
+
+        .calendar-day {
+            padding: 8px 4px;
+            font-size: 12px;
             border-radius: 4px;
-            font-size: 11px;
             cursor: pointer;
             transition: all 0.2s ease;
         }
 
-        .quick-btn:hover {
-            background: #d97706;
-            transform: scale(1.05);
+        .calendar-day.header {
+            font-weight: 600;
+            color: #6b7280;
         }
 
-        @media (max-width: 480px) {
-            .login-container {
-                padding: 30px 25px;
-                margin: 10px;
-            }
-            
-            .role-selector {
+        .calendar-day.today {
+            background: #4f46e5;
+            color: white;
+        }
+
+        .calendar-day.has-event {
+            background: rgba(79, 70, 229, 0.1);
+            color: #4f46e5;
+            font-weight: 600;
+        }
+
+        .calendar-day:hover:not(.header) {
+            background: rgba(79, 70, 229, 0.1);
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            display: none;
+            z-index: 1000;
+        }
+
+        .streak-counter {
+            background: linear-gradient(135deg, #f59e0b, #f97316);
+            color: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 15px 0;
+        }
+
+        .streak-number {
+            font-size: 32px;
+            font-weight: bold;
+            margin-bottom: 5px;
+        }
+
+        .streak-text {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        @media (max-width: 1024px) {
+            .main-grid {
                 grid-template-columns: 1fr;
-                gap: 8px;
             }
             
-            .role-option {
-                padding: 12px;
+            .modules-grid {
+                grid-template-columns: 1fr;
             }
             
-            .features-list {
+            .progress-overview {
                 flex-direction: column;
-                gap: 10px;
+                gap: 20px;
+            }
+            
+            .progress-stats {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-nav {
+                display: none;
+            }
+            
+            .container {
+                padding: 15px;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Floating Background Shapes -->
-    <div class="floating-shapes">
-        <div class="shape"></div>
-        <div class="shape"></div>
-        <div class="shape"></div>
-    </div>
-
-    <div class="login-container">
-        <!-- Logo Section -->
-        <div class="logo-section">
-            <div class="logo">📚</div>
-            <h1 class="logo-text">MathLearn</h1>
-            <p class="logo-subtitle">Límites y Continuidad</p>
-        </div>
-
-        <!-- Welcome Message -->
-        <div class="welcome-text">
-            <h2 class="welcome-title">¡Bienvenido de vuelta!</h2>
-            <p class="welcome-subtitle">Inicia sesión para continuar tu aprendizaje</p>
-        </div>
-
-        <!-- Error/Success Messages -->
-        <div class="error-message" id="errorMessage">
-            ❌ Credenciales incorrectas. Por favor, verifica tu información.
-        </div>
-        
-        <div class="success-message" id="successMessage">
-            ✅ Inicio de sesión exitoso. Redirigiendo...
-        </div>
-
-        <!-- Demo Credentials Info -->
-        <div class="demo-credentials">
-            <div class="demo-title">
-                🎯 <span>Credenciales de Demostración</span>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                📚 MathLearn
             </div>
-            <div class="demo-list">
-                <strong>Estudiante:</strong> maria@estudiante.com / demo123<br>
-                <strong>Profesor:</strong> carlos@profesor.com / demo123<br>
-                <strong>Admin:</strong> laura@admin.com / demo123
+            <div class="header-nav">
+                <a href="#" class="nav-link active">🏠 Inicio</a>
+                <a href="#" class="nav-link">📖 Mis Cursos</a>
+                <a href="#" class="nav-link">📊 Progreso</a>
+                <a href="#" class="nav-link">💬 Foro</a>
+                <a href="#" class="nav-link">🏆 Logros</a>
             </div>
-            <div class="quick-login">
-                <button class="quick-btn" onclick="quickLogin('student')">Estudiante</button>
-                <button class="quick-btn" onclick="quickLogin('teacher')">Profesor</button>
-                <button class="quick-btn" onclick="quickLogin('admin')">Admin</button>
-            </div>
-        </div>
-
-        <!-- Role Selection -->
-        <div class="role-selector">
-            <div class="role-option selected" data-role="student">
-                <div class="role-icon">🎓</div>
-                <div class="role-text">Estudiante</div>
-            </div>
-            <div class="role-option" data-role="teacher">
-                <div class="role-icon">👨‍🏫</div>
-                <div class="role-text">Profesor</div>
-            </div>
-            <div class="role-option" data-role="admin">
-                <div class="role-icon">⚙️</div>
-                <div class="role-text">Administrador</div>
-            </div>
-        </div>
-
-        <!-- Login Form -->
-        <form id="loginForm">
-            <div class="form-group">
-                <label for="email" class="form-label">📧 Correo Electrónico</label>
-                <input 
-                    type="email" 
-                    id="email" 
-                    class="form-input" 
-                    placeholder="tu.email@ejemplo.com"
-                    required
-                >
-            </div>
-
-            <div class="form-group">
-                <label for="password" class="form-label">🔒 Contraseña</label>
-                <input 
-                    type="password" 
-                    id="password" 
-                    class="form-input" 
-                    placeholder="Tu contraseña segura"
-                    required
-                >
-                <button type="button" class="password-toggle" onclick="togglePassword()">
-                    👁️
-                </button>
-            </div>
-
-            <div class="form-options">
-                <label class="remember-me">
-                    <input type="checkbox" id="rememberMe">
-                    <span>Recordarme</span>
-                </label>
-                <a href="#" class="forgot-password">¿Olvidaste tu contraseña?</a>
-            </div>
-
-            <button type="submit" class="login-button" id="loginButton">
-                <span id="buttonText">Iniciar Sesión</span>
-                <div class="loading-spinner" id="loadingSpinner"></div>
-            </button>
-        </form>
-
-        <div class="divider">
-            <span>o continúa con</span>
-        </div>
-
-        <!-- Alternative Login Methods -->
-        <div style="display: flex; gap: 10px; margin-bottom: 20px;">
-            <button style="flex: 1; padding: 12px; border: 2px solid #e5e7eb; background: white; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#4285f4'" onmouseout="this.style.borderColor='#e5e7eb'">
-                <span style="color: #4285f4; font-size: 18px;">🌐</span>
-                <span style="margin-left: 8px; color: #374151; font-weight: 500;">Google</span>
-            </button>
-            <button style="flex: 1; padding: 12px; border: 2px solid #e5e7eb; background: white; border-radius: 8px; cursor: pointer; transition: all 0.3s ease;" onmouseover="this.style.borderColor='#1877f2'" onmouseout="this.style.borderColor='#e5e7eb'">
-                <span style="color: #1877f2; font-size: 18px;">📘</span>
-                <span style="margin-left: 8px; color: #374151; font-weight: 500;">Facebook</span>
-            </button>
-        </div>
-
-        <!-- Features Preview -->
-        <div class="features-preview">
-            <div class="features-title">✨ Lo que encontrarás en MathLearn</div>
-            <div class="features-list">
-                <div class="feature-item">
-                    <div class="feature-icon">📊</div>
-                    <div>Gráficas<br>Interactivas</div>
+            <div class="user-info">
+                <div>
+                    <div style="font-weight: 600;">María González</div>
+                    <div style="font-size: 12px; color: #6b7280;">Estudiante - Ingeniería</div>
                 </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🧮</div>
-                    <div>Calculadora<br>de Límites</div>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🎯</div>
-                    <div>Ejercicios<br>Personalizados</div>
-                </div>
-                <div class="feature-item">
-                    <div class="feature-icon">🏆</div>
-                    <div>Sistema<br>de Logros</div>
-                </div>
+                <div class="avatar">MG</div>
             </div>
         </div>
 
-        <!-- Signup Link -->
-        <div class="signup-link">
-            ¿No tienes cuenta? 
-            <a href="#" onclick="showSignupForm()">Regístrate aquí</a>
-        </div>
-    </div>
-
-    <script>
-        let selectedRole = 'student';
-
-        // Role selection functionality
-        document.querySelectorAll('.role-option').forEach(option => {
-            option.addEventListener('click', function() {
-                document.querySelectorAll('.role-option').forEach(opt => opt.classList.remove('selected'));
-                this.classList.add('selected');
-                selectedRole = this.getAttribute('data-role');
+        <!-- Welcome Section -->
+        <div class="welcome-section">
+            <h1 class="welcome-title">¡Bienvenida de vuelta, María! 👋</h1>
+            <p class="welcome-subtitle">Continúa tu aprendizaje de Límites y Continuidad. ¡Vas muy bien!</p>
+            
+            <div class="progress-overview">
+                <div class="overall-progress">
+                    <div class="progress-circle">
+                        <div class="progress-text">70%</div>
+                    </div>
+                    <div style="font-weight: 600; color: #1f2937;">Progreso General</div>
+                </div>
                 
-                // Update placeholder text based on role
-                updatePlaceholders();
-            });
-        });
+                <div class="progress-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">4</span>
+                        <div>Módulos Completados</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">2</span>
+                        <div>En Progreso</div>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">92</span>
+                        <div>Promedio General</div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        function updatePlaceholders() {
-            const emailInput = document.getElementById('email');
-            const welcomeTitle = document.querySelector('.welcome-title');
-            
-            switch(selectedRole) {
-                case 'student':
-                    emailInput.placeholder = 'estudiante@universidad.edu';
-                    welcomeTitle.textContent = '¡Bienvenido de vuelta!';
-                    break;
-                case 'teacher':
-                    emailInput.placeholder = 'profesor@universidad.edu';
-                    welcomeTitle.textContent = '¡Bienvenido, Profesor!';
-                    break;
-                case 'admin':
-                    emailInput.placeholder = 'admin@mathlearn.com';
-                    welcomeTitle.textContent = '¡Bienvenido, Administrador!';
-                    break;
-            }
-        }
+        <!-- Main Content Grid -->
+        <div class="main-grid">
+            <!-- Modules Section -->
+            <div class="modules-section">
+                <div class="section-header">
+                    <h2 class="section-title">📖 Tus Módulos de Estudio</h2>
+                    <a href="#" class="view-all">Ver todos →</a>
+                </div>
 
-        // Password toggle functionality
-        function togglePassword() {
-            const passwordInput = document.getElementById('password');
-            const toggleButton = document.querySelector('.password-toggle');
-            
-            if (passwordInput.type === 'password') {
-                passwordInput.type = 'text';
-                toggleButton.textContent = '🙈';
-            } else {
-                passwordInput.type = 'password';
-                toggleButton.textContent = '👁️';
-            }
-        }
+                <div class="modules-grid">
+                    <!-- Módulo 6.1 -->
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">🎯</div>
+                            <div class="module-status status-completed">✅ Completado</div>
+                        </div>
+                        <h3 class="module-title">6.1 Definición de Límites</h3>
+                        <p class="module-description">Aprende los conceptos fundamentales de límites de funciones reales y su interpretación geométrica.</p>
+                        <div class="module-progress">
+                            <div class="progress-label">
+                                <span>Progreso</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="module-actions">
+                            <button class="btn btn-secondary" onclick="showNotification('Repasando módulo 6.1')">🔄 Repasar</button>
+                            <button class="btn btn-primary" onclick="showNotification('Abriendo módulo 6.1')">📖 Revisar</button>
+                        </div>
+                    </div>
 
-        // Quick login function
-        function quickLogin(role) {
-            const emailInput = document.getElementById('email');
-            const passwordInput = document.getElementById('password');
-            
-            // Select the role
-            document.querySelectorAll('.role-option').forEach(opt => opt.classList.remove('selected'));
-            document.querySelector(`[data-role="${role}"]`).classList.add('selected');
-            selectedRole = role;
-            
-            // Fill credentials
-            switch(role) {
-                case 'student':
-                    emailInput.value = 'maria@estudiante.com';
-                    break;
-                case 'teacher':
-                    emailInput.value = 'carlos@profesor.com';
-                    break;
-                case 'admin':
-                    emailInput.value = 'laura@admin.com';
-                    break;
-            }
-            passwordInput.value = 'demo123';
-            updatePlaceholders();
-        }
+                    <!-- Módulo 6.2 -->
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">⚡</div>
+                            <div class="module-status status-progress">📝 En Progreso</div>
+                        </div>
+                        <h3 class="module-title">6.2 Límites Laterales</h3>
+                        <p class="module-description">Explora los límites por la izquierda y derecha, y aprende cuándo existe el límite de una función.</p>
+                        <div class="module-progress">
+                            <div class="progress-label">
+                                <span>Progreso</span>
+                                <span>75%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 75%"></div>
+                            </div>
+                        </div>
+                        <div class="module-actions">
+                            <button class="btn btn-primary" onclick="showNotification('Continuando módulo 6.2')">▶️ Continuar</button>
+                        </div>
+                    </div>
 
-        // Login form submission
-        document.getElementById('loginForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            
-            const email = document.getElementById('email').value;
-            const password = document.getElementById('password').value;
-            const buttonText = document.getElementById('buttonText');
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            const errorMessage = document.getElementById('errorMessage');
-            const successMessage = document.getElementById('successMessage');
-            
-            // Hide previous messages
-            errorMessage.style.display = 'none';
-            successMessage.style.display = 'none';
-            
-            // Show loading state
-            buttonText.style.display = 'none';
-            loadingSpinner.style.display = 'inline-block';
-            
-            // Simulate login process
-            setTimeout(() => {
-                if (password === 'demo123' && email.includes('@')) {
-                    // Success
-                    successMessage.style.display = 'block';
-                    successMessage.innerHTML = `✅ ¡Bienvenido! Redirigiendo al panel de ${getRoleName()}...`;
-                    
-                    setTimeout(() => {
-                        alert(`¡Login exitoso como ${getRoleName()}!\n\nEn una aplicación real, serías redirigido al dashboard correspondiente.`);
-                        // Reset form
-                        resetForm();
-                    }, 2000);
-                } else {
-                    // Error
-                    errorMessage.style.display = 'block';
-                    resetForm();
-                }
-            }, 1500);
-        });
+                    <!-- Módulo 6.3 -->
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">🧮</div>
+                            <div class="module-status status-locked">🔒 Bloqueado</div>
+                        </div>
+                        <h3 class="module-title">6.3 Propiedades de Límites</h3>
+                        <p class="module-description">Domina las propiedades algebraicas de los límites y las técnicas de cálculo avanzadas.</p>
+                        <div class="module-progress">
+                            <div class="progress-label">
+                                <span>Progreso</span>
+                                <span>0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="module-actions">
+                            <button class="btn btn-disabled">🔒 Completa 6.2 primero</button>
+                        </div>
+                    </div>
 
-        function getRoleName() {
-            switch(selectedRole) {
-                case 'student': return 'Estudiante';
-                case 'teacher': return 'Profesor';
-                case 'admin': return 'Administrador';
-                default: return 'Usuario';
-            }
-        }
+                    <!-- Módulo 6.4 -->
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">📐</div>
+                            <div class="module-status status-locked">🔒 Bloqueado</div>
+                        </div>
+                        <h3 class="module-title">6.4 Límites Trigonométricos</h3>
+                        <p class="module-description">Aplica los conceptos de límites a funciones trigonométricas y sus casos especiales.</p>
+                        <div class="module-progress">
+                            <div class="progress-label">
+                                <span>Progreso</span>
+                                <span>0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="module-actions">
+                            <button class="btn btn-disabled">🔒 Próximamente</button>
+                        </div>
+                    </div>
 
-        function resetForm() {
-            const buttonText = document.getElementById('buttonText');
-            const loadingSpinner = document.getElementById('loadingSpinner');
-            
-            buttonText.style.display = 'inline';
-            loadingSpinner.style.display = 'none';
-        }
+                    <!-- Módulo 7.1 -->
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">🔗</div>
+                            <div class="module-status status-locked">🔒 Bloqueado</div>
+                        </div>
+                        <h3 class="module-title">7.1 Continuidad Puntual</h3>
+                        <p class="module-description">Descubre el concepto de continuidad en un punto y sus condiciones necesarias.</p>
+                        <div class="module-progress">
+                            <div class="progress-label">
+                                <span>Progreso</span>
+                                <span>0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="module-actions">
+                            <button class="btn btn-disabled">🔒 Próximamente</button>
+                        </div>
+                    </div>
 
-        function showSignupForm() {
-            alert('¡Funcionalidad de registro!\n\nAquí se abriría el formulario de registro con campos adicionales como:\n- Nombre completo\n- Institución\n- Código de curso\n- Confirmación de contraseña');
-        }
+                    <!-- Módulo 7.2 -->
+                    <div class="module-card">
+                        <div class="module-header">
+                            <div class="module-icon">🏛️</div>
+                            <div class="module-status status-locked">🔒 Bloqueado</div>
+                        </div>
+                        <h3 class="module-title">7.2 Teoremas de Continuidad</h3>
+                        <p class="module-description">Estudia los teoremas fundamentales sobre continuidad y sus aplicaciones prácticas.</p>
+                        <div class="module-progress">
+                            <div class="progress-label">
+                                <span>Progreso</span>
+                                <span>0%</span>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill" style="width: 0%"></div>
+                            </div>
+                        </div>
+                        <div class="module-actions">
+                            <button class="btn btn-disabled">🔒 Próximamente</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-        // Add some dynamic effects
-        document.addEventListener('DOMContentLoaded', function() {
-            // Animate login container entrance
-            const container = document.querySelector('.login-container');
-            container.style.opacity = '0';
-            container.style.transform = 'translateY(20px)';
-            
-            setTimeout(() => {
-                container.style.transition = 'all 0.6s ease';
-                container.style.opacity = '1';
-                container.style.transform = 'translateY(0)';
-            }, 100);
-            
-            // Focus on email input
-            setTimeout(() => {
-                document.getElementById('email').focus();
-            }, 600);
-        });
+            <!-- Sidebar Widgets -->
+            <div class="sidebar-widgets">
+                <!-- Progreso y Racha -->
+                <div class="widget">
+                    <div class="widget-title">🔥 Tu Racha de Estudio</div>
+                    <div class="streak-counter">
+                        <div class="streak-number">7</div>
+                        <div class="streak-text">días consecutivos</div>
+                    </div>
+                    <p style="text-align: center; color: #6b7280; font-size: 14px;">
+                        ¡Excelente! Sigue así para mantener tu racha activa.
+                    </p>
+                </div>
 
-        // Add floating animation to shapes
-        document.querySelectorAll('.shape').forEach((shape, index) => {
-            shape.style.animationDelay = (index * 2) + 's';
-        });
-    </script>
-</body>
-</html>
+                <!-- Logros Recientes -->
+                <div class="widget">
+                    <div class="widget-title">🏆 Logros Recientes</div>
+                    <div>
+                        <div class="achievement-item">
+                            <div class="achievement-icon" style="background: linear-gradient(45deg, #10b981, #059669);">🎯</div>
+                            <div class="achievement-content">
+                                <div class="achievement-title">Maestro de Límites</div>
+                                <div class="achievement-desc">Completaste 3 módulos de límites</div>
+                            </div>
+                        </div>
+                        <div class="achievement-item">
+                            <div class="achievement-icon" style="background: linear-gradient(45deg, #f59e0b, #f97316);">⭐</div>
+                            <div class="achievement-content">
+                                <div class="achievement-title">Estudiante Dedicado</div>
+                                <div class="achievement-desc">7 días de estudio consecutivos</div>
+                            </div>
+                        </div>
+                        <div class="achievement-item">
+                            <div class="achievement-icon" style="background: linear-gradient(45deg, #8b5cf6, #7c3aed);">💯</div>
+                            <div class="achievement-content">
+                                <div class="achievement-title">Puntuación Perfecta</div
