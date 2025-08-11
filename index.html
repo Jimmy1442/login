@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MathLearn - Mis Logros</title>
+    <title>MathLearn - Portal Estudiante</title>
     <style>
         * {
             margin: 0;
@@ -15,7 +15,6 @@
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             min-height: 100vh;
-            overflow-x: hidden;
         }
 
         .container {
@@ -26,123 +25,31 @@
 
         .header {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 25px 35px;
-            margin-bottom: 40px;
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
             display: flex;
             justify-content: space-between;
             align-items: center;
         }
 
-        .main-nav {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 15px 25px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 30px;
-        }
-
-        .nav-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 20px;
-            border-radius: 12px;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            color: #6b7280;
-            text-decoration: none;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .nav-item::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 0;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.1), rgba(124, 58, 237, 0.1));
-            transition: width 0.3s ease;
-            z-index: 0;
-        }
-
-        .nav-item:hover::before {
-            width: 100%;
-        }
-
-        .nav-item:hover {
-            color: #4f46e5;
-            transform: translateY(-2px);
-        }
-
-        .nav-item.active {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            color: white;
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
-        }
-
-        .nav-item.active::before {
-            display: none;
-        }
-
-        .nav-text {
-            position: relative;
-            z-index: 1;
-        }
-
-        .nav-icon {
-            font-size: 18px;
-            position: relative;
-            z-index: 1;
-        }
-
         .logo {
-            font-size: 28px;
-            font-weight: bold;
-            background: linear-gradient(45deg, #4f46e5, #7c3aed);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .welcome-section {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .welcome-text {
-            text-align: right;
-        }
-
-        .welcome-greeting {
             font-size: 24px;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 5px;
+            font-weight: bold;
+            color: #4f46e5;
         }
 
-        .welcome-subtitle {
-            color: #6b7280;
-            font-size: 14px;
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        .user-avatar {
-            width: 60px;
-            height: 60px;
+        .avatar {
+            width: 40px;
+            height: 40px;
             border-radius: 50%;
             background: linear-gradient(45deg, #f093fb 0%, #f5576c 100%);
             display: flex;
@@ -150,567 +57,349 @@
             justify-content: center;
             color: white;
             font-weight: bold;
-            font-size: 24px;
-            box-shadow: 0 8px 25px rgba(240, 147, 251, 0.4);
         }
 
-        .page-header {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 30px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .page-title {
-            font-size: 32px;
-            font-weight: 800;
-            color: #1f2937;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 15px;
-        }
-
-        .page-subtitle {
-            font-size: 16px;
-            color: #6b7280;
-            line-height: 1.6;
-        }
-
-        .achievements-overview {
+        .main-content {
             display: grid;
-            grid-template-columns: 2fr 1fr;
+            grid-template-columns: 280px 1fr 300px;
             gap: 30px;
-            margin-bottom: 30px;
         }
 
-        .main-achievements-card {
+        .sidebar {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-
-        .achievement-showcase {
-            text-align: center;
-            margin-bottom: 30px;
-            position: relative;
-        }
-
-        .showcase-trophy {
-            font-size: 120px;
-            margin-bottom: 20px;
-            animation: float 3s ease-in-out infinite;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .showcase-title {
-            font-size: 24px;
-            font-weight: 800;
-            color: #1f2937;
-            margin-bottom: 10px;
-        }
-
-        .showcase-description {
-            color: #6b7280;
-            font-size: 16px;
-            line-height: 1.5;
-        }
-
-        .recent-achievements {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 20px;
-        }
-
-        .recent-achievement {
-            padding: 20px;
-            background: linear-gradient(135deg, rgba(16, 185, 129, 0.1), rgba(5, 150, 105, 0.1));
+            backdrop-filter: blur(10px);
             border-radius: 15px;
-            border-left: 4px solid #10b981;
-            transition: all 0.3s ease;
-        }
-
-        .recent-achievement:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.2);
-        }
-
-        .achievement-icon {
-            font-size: 32px;
-            margin-bottom: 10px;
-        }
-
-        .achievement-name {
-            font-weight: 700;
-            color: #059669;
-            margin-bottom: 5px;
-            font-size: 16px;
-        }
-
-        .achievement-date {
-            font-size: 12px;
-            color: #047857;
-        }
-
-        .stats-sidebar {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
             padding: 25px;
+            height: fit-content;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
         }
 
-        .stats-title {
+        .sidebar h3 {
+            color: #1f2937;
+            margin-bottom: 20px;
             font-size: 18px;
-            font-weight: 700;
-            color: #1f2937;
-            text-align: center;
-            margin-bottom: 10px;
         }
 
-        .level-progress {
-            text-align: center;
-            margin-bottom: 25px;
-        }
-
-        .level-badge {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #f59e0b, #f97316);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto 15px;
-            color: white;
-            font-size: 32px;
-            box-shadow: 0 8px 25px rgba(245, 158, 11, 0.4);
-        }
-
-        .level-info {
-            font-size: 20px;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 5px;
-        }
-
-        .level-description {
-            font-size: 14px;
-            color: #6b7280;
+        .chapter {
             margin-bottom: 15px;
-        }
-
-        .xp-progress {
-            margin-bottom: 10px;
-        }
-
-        .xp-bar {
-            width: 100%;
-            height: 12px;
-            background: #e5e7eb;
-            border-radius: 6px;
-            overflow: hidden;
-            margin-bottom: 8px;
-        }
-
-        .xp-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #f59e0b, #f97316);
-            border-radius: 6px;
-            transition: width 0.6s ease;
-        }
-
-        .xp-text {
-            display: flex;
-            justify-content: space-between;
-            font-size: 12px;
-            color: #6b7280;
-        }
-
-        .stat-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             padding: 15px;
-            background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(124, 58, 237, 0.05));
-            border-radius: 12px;
-            border: 1px solid rgba(79, 70, 229, 0.1);
-        }
-
-        .stat-label {
-            font-weight: 600;
-            color: #4b5563;
-            font-size: 14px;
-        }
-
-        .stat-value {
-            font-size: 18px;
-            font-weight: 900;
-            color: #4f46e5;
-        }
-
-        .achievements-tabs {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-            margin-bottom: 30px;
-        }
-
-        .tabs-header {
-            display: flex;
-            gap: 5px;
-            margin-bottom: 25px;
-            background: #f3f4f6;
-            padding: 5px;
-            border-radius: 15px;
-        }
-
-        .tab-button {
-            flex: 1;
-            padding: 12px 20px;
-            background: transparent;
-            border: none;
             border-radius: 10px;
-            font-weight: 600;
-            color: #6b7280;
             cursor: pointer;
             transition: all 0.3s ease;
-            font-size: 14px;
+            border-left: 4px solid transparent;
         }
 
-        .tab-button.active {
-            background: linear-gradient(135deg, #4f46e5, #7c3aed);
-            color: white;
-            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        .chapter:hover {
+            background: rgba(79, 70, 229, 0.1);
+            border-left-color: #4f46e5;
         }
 
-        .tab-content {
-            display: none;
+        .chapter.active {
+            background: rgba(79, 70, 229, 0.15);
+            border-left-color: #4f46e5;
         }
 
-        .tab-content.active {
-            display: block;
-        }
-
-        .achievements-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 20px;
-        }
-
-        .achievement-card {
-            background: white;
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .achievement-card.earned {
-            border-color: #10b981;
-        }
-
-        .achievement-card.locked {
-            opacity: 0.6;
-            background: #f9fafb;
-        }
-
-        .achievement-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-        }
-
-        .achievement-card.earned::before {
-            content: '';
-            position: absolute;
-            top: -2px;
-            left: -2px;
-            right: -2px;
-            height: 4px;
-            background: linear-gradient(90deg, #10b981, #059669);
-            border-radius: 15px 15px 0 0;
-        }
-
-        .achievement-header {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-
-        .achievement-badge {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            margin: 0 auto 15px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 36px;
-            position: relative;
-        }
-
-        .badge-bronze {
-            background: linear-gradient(45deg, #cd7f32, #b8860b);
-            box-shadow: 0 8px 25px rgba(205, 127, 50, 0.3);
-        }
-
-        .badge-silver {
-            background: linear-gradient(45deg, #c0c0c0, #a8a8a8);
-            box-shadow: 0 8px 25px rgba(192, 192, 192, 0.3);
-        }
-
-        .badge-gold {
-            background: linear-gradient(45deg, #ffd700, #ffb347);
-            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.4);
-        }
-
-        .badge-platinum {
-            background: linear-gradient(45deg, #e5e4e2, #bcc6cc);
-            box-shadow: 0 8px 25px rgba(229, 228, 226, 0.4);
-        }
-
-        .badge-locked {
-            background: #e5e7eb;
-            color: #9ca3af;
-            box-shadow: none;
-        }
-
-        .achievement-title {
-            font-size: 18px;
-            font-weight: 700;
+        .chapter-title {
+            font-weight: 600;
             color: #1f2937;
-            margin-bottom: 8px;
+            margin-bottom: 5px;
         }
 
-        .achievement-card.locked .achievement-title {
-            color: #9ca3af;
-        }
-
-        .achievement-description {
-            color: #6b7280;
-            font-size: 14px;
-            line-height: 1.5;
-            margin-bottom: 15px;
-        }
-
-        .achievement-progress {
-            margin-bottom: 15px;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
+        .chapter-progress {
             font-size: 12px;
             color: #6b7280;
-            margin-bottom: 5px;
         }
 
         .progress-bar {
             width: 100%;
-            height: 8px;
+            height: 4px;
             background: #e5e7eb;
-            border-radius: 4px;
+            border-radius: 2px;
+            margin-top: 8px;
             overflow: hidden;
         }
 
         .progress-fill {
             height: 100%;
             background: linear-gradient(90deg, #4f46e5, #7c3aed);
-            border-radius: 4px;
-            transition: width 0.6s ease;
+            border-radius: 2px;
+            transition: width 0.3s ease;
         }
 
-        .achievement-reward {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 12px;
-            background: rgba(79, 70, 229, 0.05);
-            border-radius: 8px;
-            font-size: 12px;
-        }
-
-        .reward-xp {
-            color: #4f46e5;
-            font-weight: 600;
-        }
-
-        .reward-date {
-            color: #6b7280;
-        }
-
-        .achievements-leaderboard {
+        .content-area {
             background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(15px);
-            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
             padding: 30px;
             box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
         }
 
-        .leaderboard-title {
-            font-size: 24px;
-            font-weight: 700;
-            color: #1f2937;
-            margin-bottom: 25px;
+        .lesson-header {
             display: flex;
+            justify-content: space-between;
             align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 2px solid #e5e7eb;
+        }
+
+        .lesson-title {
+            color: #1f2937;
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .lesson-actions {
+            display: flex;
             gap: 10px;
         }
 
-        .leaderboard-list {
+        .btn {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #4f46e5, #7c3aed);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.3);
+        }
+
+        .btn-secondary {
+            background: rgba(79, 70, 229, 0.1);
+            color: #4f46e5;
+            border: 2px solid #4f46e5;
+        }
+
+        .interactive-section {
+            margin: 30px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(79, 70, 229, 0.05), rgba(124, 58, 237, 0.05));
+            border-radius: 12px;
+            border: 1px solid rgba(79, 70, 229, 0.2);
+        }
+
+        .function-visualizer {
+            background: #f8fafc;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            border: 2px dashed #cbd5e1;
+            text-align: center;
+            min-height: 300px;
             display: flex;
             flex-direction: column;
-            gap: 15px;
-        }
-
-        .leaderboard-item {
-            display: flex;
+            justify-content: center;
             align-items: center;
-            gap: 20px;
-            padding: 20px;
+        }
+
+        .graph-placeholder {
+            width: 100%;
+            height: 200px;
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            transition: all 0.3s ease;
-        }
-
-        .leaderboard-item:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
-        }
-
-        .leaderboard-position {
-            font-size: 24px;
-            font-weight: 900;
-            color: #4f46e5;
-            min-width: 40px;
-            text-align: center;
-        }
-
-        .position-1 {
-            color: #ffd700;
-        }
-
-        .position-2 {
-            color: #c0c0c0;
-        }
-
-        .position-3 {
-            color: #cd7f32;
-        }
-
-        .leaderboard-avatar {
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
+            border-radius: 8px;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: white;
-            font-weight: bold;
-            font-size: 20px;
+            color: #64748b;
+            font-size: 18px;
+            margin: 10px 0;
+            position: relative;
+            overflow: hidden;
         }
 
-        .leaderboard-info {
-            flex: 1;
+        .graph-placeholder::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, #e2e8f0 25%, transparent 25%), 
+                        linear-gradient(-45deg, #e2e8f0 25%, transparent 25%), 
+                        linear-gradient(45deg, transparent 75%, #e2e8f0 75%), 
+                        linear-gradient(-45deg, transparent 75%, #e2e8f0 75%);
+            background-size: 20px 20px;
+            background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+            opacity: 0.3;
         }
 
-        .leaderboard-name {
+        .input-group {
+            margin: 15px 0;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 600;
+            color: #374151;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #d1d5db;
+            border-radius: 6px;
             font-size: 16px;
-            font-weight: 700;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #4f46e5;
+            box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+        }
+
+        .tools-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            height: fit-content;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .tool-section {
+            margin-bottom: 25px;
+        }
+
+        .tool-section h4 {
             color: #1f2937;
-            margin-bottom: 3px;
+            margin-bottom: 15px;
+            font-size: 16px;
+            font-weight: 600;
         }
 
-        .leaderboard-level {
-            font-size: 12px;
-            color: #6b7280;
+        .progress-circle {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: conic-gradient(#4f46e5 0deg 252deg, #e5e7eb 252deg 360deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            position: relative;
         }
 
-        .leaderboard-score {
-            text-align: right;
-        }
-
-        .score-value {
-            font-size: 20px;
-            font-weight: 900;
-            color: #4f46e5;
-        }
-
-        .score-label {
-            font-size: 11px;
-            color: #6b7280;
-        }
-
-        .floating-help {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
+        .progress-circle::before {
+            content: '';
             width: 60px;
             height: 60px;
             border-radius: 50%;
-            background: linear-gradient(45deg, #4f46e5, #7c3aed);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 24px;
-            cursor: pointer;
-            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
-            transition: all 0.3s ease;
-            z-index: 1000;
+            background: white;
+            position: absolute;
         }
 
-        .floating-help:hover {
-            transform: scale(1.1);
+        .progress-text {
+            position: relative;
+            z-index: 1;
+            font-weight: bold;
+            color: #1f2937;
+        }
+
+        .calculator-tool {
+            background: #f8fafc;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 10px 0;
+        }
+
+        .calculator-input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #d1d5db;
+            border-radius: 4px;
+            margin-bottom: 10px;
+        }
+
+        .quick-actions {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .action-card {
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .action-card:hover {
+            border-color: #4f46e5;
+            transform: translateY(-2px);
+        }
+
+        .action-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+            color: #4f46e5;
+        }
+
+        .breadcrumb {
+            margin-bottom: 20px;
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .breadcrumb a {
+            color: #4f46e5;
+            text-decoration: none;
+        }
+
+        .formula-box {
+            background: #fef3c7;
+            border: 2px solid #f59e0b;
+            border-radius: 8px;
+            padding: 15px;
+            margin: 20px 0;
+            font-family: 'Courier New', monospace;
+            text-align: center;
+            font-size: 18px;
+        }
+
+        .example-box {
+            background: #ecfdf5;
+            border: 2px solid #10b981;
+            border-radius: 8px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #10b981;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            display: none;
         }
 
         @media (max-width: 1024px) {
-            .achievements-overview {
+            .main-content {
                 grid-template-columns: 1fr;
             }
             
-            .recent-achievements {
-                grid-template-columns: 1fr;
-            }
-            
-            .achievements-grid {
-                grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            }
-        }
-
-        @media (max-width: 768px) {
-            .tabs-header {
-                flex-direction: column;
-                gap: 8px;
-            }
-            
-            .achievements-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .leaderboard-item {
-                flex-wrap: wrap;
-                gap: 15px;
-            }
-            
-            .leaderboard-score {
-                text-align: left;
+            .sidebar, .tools-panel {
+                order: 2;
             }
         }
     </style>
@@ -719,198 +408,248 @@
     <div class="container">
         <!-- Header -->
         <div class="header">
-            <div class="logo">
-                📚 MathLearn
-            </div>
-            <div class="welcome-section">
-                <div class="welcome-text">
-                    <div class="welcome-greeting">¡Bienvenida, María!</div>
-                    <div class="welcome-subtitle">Martes, 10 de Agosto 2025 • 2:30 PM</div>
-                </div>
-                <div class="user-avatar">M</div>
+            <div class="logo">📚 MathLearn - Límites y Continuidad</div>
+            <div class="user-info">
+                <span>¡Hola, María!</span>
+                <div class="avatar">M</div>
             </div>
         </div>
 
-        <!-- Main Navigation Menu -->
-        <div class="main-nav">
-            <a href="#" class="nav-item" onclick="switchSection('inicio')">
-                <div class="nav-icon">🏠</div>
-                <div class="nav-text">Inicio</div>
-            </a>
-            <a href="#" class="nav-item" onclick="switchSection('cursos')">
-                <div class="nav-icon">📖</div>
-                <div class="nav-text">Mis Cursos</div>
-            </a>
-            <a href="#" class="nav-item" onclick="switchSection('progreso')">
-                <div class="nav-icon">📊</div>
-                <div class="nav-text">Progreso</div>
-            </a>
-            <a href="#" class="nav-item" onclick="switchSection('foro')">
-                <div class="nav-icon">💬</div>
-                <div class="nav-text">Foro</div>
-            </a>
-            <a href="#" class="nav-item active" onclick="switchSection('logros')">
-                <div class="nav-icon">🏆</div>
-                <div class="nav-text">Logros</div>
-            </a>
-        </div>
-
-        <!-- Page Header -->
-        <div class="page-header">
-            <h1 class="page-title">
-                🏆 Mis Logros y Reconocimientos
-            </h1>
-            <p class="page-subtitle">
-                Celebra tus éxitos académicos y descubre nuevos desafíos. Cada logro representa 
-                tu dedicación y progreso en el aprendizaje de Análisis Matemático.
-            </p>
-        </div>
-
-        <!-- Achievements Overview -->
-        <div class="achievements-overview">
-            <div class="main-achievements-card">
-                <div class="achievement-showcase">
-                    <div class="showcase-trophy">🏆</div>
-                    <div class="showcase-title">Explorador de Límites</div>
-                    <div class="showcase-description">
-                        ¡Felicitaciones! Has desbloqueado este logro al completar exitosamente 
-                        tu primer tema de límites con una calificación superior al 85%.
-                    </div>
-                </div>
+        <!-- Main Content Grid -->
+        <div class="main-content">
+            <!-- Sidebar - Navegación de Módulos -->
+            <div class="sidebar">
+                <h3>📖 Módulos del Curso</h3>
                 
-                <div class="recent-achievements">
-                    <div class="recent-achievement">
-                        <div class="achievement-icon">🎯</div>
-                        <div class="achievement-name">Primera Victoria</div>
-                        <div class="achievement-date">Obtenido el 20 Jul 2025</div>
+                <div class="chapter active">
+                    <div class="chapter-title">6.1 Definición de Límites</div>
+                    <div class="chapter-progress">Completado</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%"></div>
                     </div>
-                    <div class="recent-achievement">
-                        <div class="achievement-icon">📚</div>
-                        <div class="achievement-name">Estudiante Dedicado</div>
-                        <div class="achievement-date">Obtenido el 25 Jul 2025</div>
+                </div>
+
+                <div class="chapter">
+                    <div class="chapter-title">6.2 Límites Laterales</div>
+                    <div class="chapter-progress">En progreso (75%)</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 75%"></div>
                     </div>
-                    <div class="recent-achievement">
-                        <div class="achievement-icon">⚡</div>
-                        <div class="achievement-name">Velocidad Mental</div>
-                        <div class="achievement-date">Obtenido el 3 Ago 2025</div>
+                </div>
+
+                <div class="chapter">
+                    <div class="chapter-title">6.3 Propiedades de Límites</div>
+                    <div class="chapter-progress">Pendiente</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
                     </div>
-                    <div class="recent-achievement">
-                        <div class="achievement-icon">🔥</div>
-                        <div class="achievement-name">Racha de Fuego</div>
-                        <div class="achievement-date">Obtenido el 8 Ago 2025</div>
+                </div>
+
+                <div class="chapter">
+                    <div class="chapter-title">6.4 Límites Trigonométricos</div>
+                    <div class="chapter-progress">Bloqueado</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="chapter">
+                    <div class="chapter-title">7.1 Continuidad Puntual</div>
+                    <div class="chapter-progress">Bloqueado</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
+                    </div>
+                </div>
+
+                <div class="chapter">
+                    <div class="chapter-title">7.2 Teoremas de Continuidad</div>
+                    <div class="chapter-progress">Bloqueado</div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 0%"></div>
                     </div>
                 </div>
             </div>
 
-            <div class="stats-sidebar">
-                <div class="stats-title">Mi Nivel</div>
-                <div class="level-progress">
-                    <div class="level-badge">⭐</div>
-                    <div class="level-info">Nivel 3</div>
-                    <div class="level-description">Estudiante Avanzado</div>
-                    <div class="xp-progress">
-                        <div class="xp-bar">
-                            <div class="xp-fill" style="width: 65%"></div>
+            <!-- Content Area -->
+            <div class="content-area">
+                <div class="breadcrumb">
+                    <a href="#">Inicio</a> > <a href="#">Límites</a> > 6.2 Límites Laterales
+                </div>
+
+                <div class="lesson-header">
+                    <h1 class="lesson-title">6.2 Límites Laterales y Existencia del Límite</h1>
+                    <div class="lesson-actions">
+                        <button class="btn btn-secondary">📋 Notas</button>
+                        <button class="btn btn-primary">▶️ Video</button>
+                    </div>
+                </div>
+
+                <!-- Contenido Teórico -->
+                <div class="theory-section">
+                    <h3>💡 Concepto Clave</h3>
+                    <p style="margin: 15px 0; line-height: 1.6; color: #374151;">
+                        Los límites laterales nos permiten analizar el comportamiento de una función cuando nos acercamos a un punto desde diferentes direcciones. Es fundamental para entender la existencia del límite en un punto.
+                    </p>
+
+                    <div class="formula-box">
+                        lim f(x) = L  ⟺  lim⁻ f(x) = lim⁺ f(x) = L<br>
+                        x→a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x→a&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;x→a
+                    </div>
+                </div>
+
+                <!-- Sección Interactiva -->
+                <div class="interactive-section">
+                    <h3>🎯 Visualizador Interactivo</h3>
+                    <p style="margin-bottom: 20px; color: #374151;">Explora cómo se comportan los límites laterales modificando la función:</p>
+                    
+                    <div class="input-group">
+                        <label for="function-input">Función f(x):</label>
+                        <input type="text" id="function-input" placeholder="Ej: (x²-4)/(x-2)" value="(x²-4)/(x-2)">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="point-input">Punto a evaluar:</label>
+                        <input type="number" id="point-input" placeholder="2" value="2">
+                    </div>
+
+                    <div class="function-visualizer">
+                        <div class="graph-placeholder">
+                            <div style="text-align: center;">
+                                <div style="font-size: 24px; margin-bottom: 10px;">📊</div>
+                                <div>Gráfica de f(x) = (x²-4)/(x-2)</div>
+                                <div style="font-size: 14px; color: #64748b; margin-top: 10px;">
+                                    Límite por la izquierda: 4<br>
+                                    Límite por la derecha: 4<br>
+                                    <strong>Límite existe: Sí (L = 4)</strong>
+                                </div>
+                            </div>
                         </div>
-                        <div class="xp-text">
-                            <span>1,300 XP</span>
-                            <span>2,000 XP</span>
+                        <button class="btn btn-primary" onclick="updateGraph()">🔄 Actualizar Gráfica</button>
+                    </div>
+                </div>
+
+                <!-- Ejemplo Paso a Paso -->
+                <div class="example-box">
+                    <h4>📝 Ejemplo Resuelto</h4>
+                    <p><strong>Encontrar:</strong> lim (x²-4)/(x-2) cuando x→2</p>
+                    <div style="margin: 15px 0; padding-left: 20px;">
+                        <p><strong>Paso 1:</strong> Factorizar numerador: x²-4 = (x+2)(x-2)</p>
+                        <p><strong>Paso 2:</strong> Simplificar: (x+2)(x-2)/(x-2) = x+2</p>
+                        <p><strong>Paso 3:</strong> Evaluar límite: lim (x+2) = 2+2 = 4</p>
+                    </div>
+                </div>
+
+                <!-- Ejercicios -->
+                <div style="margin-top: 30px;">
+                    <h3>✏️ Practica Ahora</h3>
+                    <div style="background: #f1f5f9; padding: 20px; border-radius: 8px; margin: 15px 0;">
+                        <p><strong>Ejercicio 1:</strong> Calcula lim (x³-8)/(x-2) cuando x→2</p>
+                        <input type="text" placeholder="Escribe tu respuesta..." style="width: 100%; padding: 10px; margin: 10px 0; border: 1px solid #d1d5db; border-radius: 4px;">
+                        <button class="btn btn-primary">Verificar Respuesta</button>
+                    </div>
+                </div>
+
+                <!-- Navegación -->
+                <div style="display: flex; justify-content: space-between; margin-top: 40px; padding-top: 20px; border-top: 1px solid #e5e7eb;">
+                    <button class="btn btn-secondary">⬅️ Anterior: 6.1 Definición</button>
+                    <button class="btn btn-primary">Siguiente: 6.3 Propiedades ➡️</button>
+                </div>
+            </div>
+
+            <!-- Panel de Herramientas -->
+            <div class="tools-panel">
+                <div class="tool-section">
+                    <h4>📊 Tu Progreso</h4>
+                    <div class="progress-circle">
+                        <div class="progress-text">70%</div>
+                    </div>
+                    <p style="text-align: center; color: #6b7280; font-size: 14px;">4 de 6 módulos completados</p>
+                </div>
+
+                <div class="tool-section">
+                    <h4>🧮 Calculadora de Límites</h4>
+                    <div class="calculator-tool">
+                        <input type="text" placeholder="f(x) = " class="calculator-input">
+                        <input type="text" placeholder="x → " class="calculator-input">
+                        <button class="btn btn-primary" style="width: 100%; font-size: 14px;">Calcular</button>
+                        <div style="margin-top: 10px; padding: 10px; background: white; border-radius: 4px; font-size: 14px;">
+                            Resultado: <strong>L = 4</strong>
                         </div>
                     </div>
                 </div>
-                
-                <div class="stat-item">
-                    <div class="stat-label">Logros Desbloqueados</div>
-                    <div class="stat-value">12</div>
+
+                <div class="tool-section">
+                    <h4>🚀 Acciones Rápidas</h4>
+                    <div class="quick-actions">
+                        <div class="action-card">
+                            <div class="action-icon">📝</div>
+                            <div style="font-size: 12px;">Examen Práctica</div>
+                        </div>
+                        <div class="action-card">
+                            <div class="action-icon">💬</div>
+                            <div style="font-size: 12px;">Foro Dudas</div>
+                        </div>
+                        <div class="action-card">
+                            <div class="action-icon">📚</div>
+                            <div style="font-size: 12px;">Biblioteca</div>
+                        </div>
+                        <div class="action-card">
+                            <div class="action-icon">🏆</div>
+                            <div style="font-size: 12px;">Logros</div>
+                        </div>
+                    </div>
                 </div>
-                <div class="stat-item">
-                    <div class="stat-label">XP Total</div>
-                    <div class="stat-value">1,300</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">Posición en Ranking</div>
-                    <div class="stat-value">#8</div>
-                </div>
-                <div class="stat-item">
-                    <div class="stat-label">Insignias Especiales</div>
-                    <div class="stat-value">3</div>
+
+                <div class="tool-section">
+                    <h4>🎯 Próximos Objetivos</h4>
+                    <div style="font-size: 14px; color: #374151;">
+                        <div style="margin: 8px 0; padding: 8px; background: white; border-radius: 4px;">
+                            ✅ Dominar límites laterales
+                        </div>
+                        <div style="margin: 8px 0; padding: 8px; background: rgba(79, 70, 229, 0.1); border-radius: 4px;">
+                            🎯 Aprender propiedades
+                        </div>
+                        <div style="margin: 8px 0; padding: 8px; background: #f3f4f6; border-radius: 4px;">
+                            ⏳ Límites trigonométricos
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
+    </div>
 
-        <!-- Achievements Tabs -->
-        <div class="achievements-tabs">
-            <div class="tabs-header">
-                <button class="tab-button active" onclick="switchTab('all')">Todos los Logros</button>
-                <button class="tab-button" onclick="switchTab('earned')">Desbloqueados</button>
-                <button class="tab-button" onclick="switchTab('progress')">En Progreso</button>
-                <button class="tab-button" onclick="switchTab('locked')">Bloqueados</button>
-            </div>
+    <!-- Notification -->
+    <div class="notification" id="notification">
+        ¡Excelente! Has completado esta lección.
+    </div>
 
-            <!-- All Achievements Tab -->
-            <div class="tab-content active" id="tab-all">
-                <div class="achievements-grid">
-                    <!-- Earned Achievements -->
-                    <div class="achievement-card earned">
-                        <div class="achievement-header">
-                            <div class="achievement-badge badge-gold">🏆</div>
-                            <div class="achievement-title">Explorador de Límites</div>
-                        </div>
-                        <div class="achievement-description">
-                            Completa tu primer tema de límites con una calificación superior al 85%.
-                        </div>
-                        <div class="achievement-progress">
-                            <div class="progress-label">
-                                <span>Completado</span>
-                                <span>100%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 100%"></div>
-                            </div>
-                        </div>
-                        <div class="achievement-reward">
-                            <span class="reward-xp">+150 XP</span>
-                            <span class="reward-date">Obtenido: 3 Ago 2025</span>
-                        </div>
-                    </div>
+    <script>
+        function updateGraph() {
+            const notification = document.getElementById('notification');
+            notification.style.display = 'block';
+            setTimeout(() => {
+                notification.style.display = 'none';
+            }, 3000);
+        }
 
-                    <div class="achievement-card earned">
-                        <div class="achievement-header">
-                            <div class="achievement-badge badge-bronze">🎯</div>
-                            <div class="achievement-title">Primera Victoria</div>
-                        </div>
-                        <div class="achievement-description">
-                            Resuelve tu primer ejercicio correctamente sin ayuda.
-                        </div>
-                        <div class="achievement-progress">
-                            <div class="progress-label">
-                                <span>Completado</span>
-                                <span>100%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 100%"></div>
-                            </div>
-                        </div>
-                        <div class="achievement-reward">
-                            <span class="reward-xp">+50 XP</span>
-                            <span class="reward-date">Obtenido: 20 Jul 2025</span>
-                        </div>
-                    </div>
+        // Simulación de interactividad
+        document.querySelectorAll('.chapter').forEach(chapter => {
+            chapter.addEventListener('click', function() {
+                document.querySelectorAll('.chapter').forEach(c => c.classList.remove('active'));
+                this.classList.add('active');
+            });
+        });
 
-                    <div class="achievement-card earned">
-                        <div class="achievement-header">
-                            <div class="achievement-badge badge-silver">📚</div>
-                            <div class="achievement-title">Estudiante Dedicado</div>
-                        </div>
-                        <div class="achievement-description">
-                            Estudia durante 5 días consecutivos por al menos 30 minutos cada día.
-                        </div>
-                        <div class="achievement-progress">
-                            <div class="progress-label">
-                                <span>Completado</span>
-                                <span>100%</span>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill" style="width: 100%"></div>
-                            </div>
-                        </div
+        document.querySelectorAll('.action-card').forEach(card => {
+            card.addEventListener('click', function() {
+                this.style.background = '#4f46e5';
+                this.style.color = 'white';
+                setTimeout(() => {
+                    this.style.background = 'white';
+                    this.style.color = 'inherit';
+                }, 200);
+            });
+        });
+    </script>
+</body>
+</html>
